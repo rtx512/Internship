@@ -68,6 +68,17 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
         },
         {
             margin: 10,
+            xtype: 'datefield',
+            fieldLabel: 'Дата',
+            name: 'date',
+            format: 'd.m.Y',
+            altFormats: 'd,m,Y|d.m.Y',
+            bind: {
+                value: '{form.dateID}'
+            }
+        },
+        {
+            margin: 10,
             xtype:'checkbox',
             fieldLabel: 'Повторять:',
             bind: {

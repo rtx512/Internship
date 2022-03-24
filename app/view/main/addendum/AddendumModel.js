@@ -9,6 +9,7 @@ Ext.define('scheduleApp.view.main.addendum.AddendumModel', {
             subjectID: null,
             teacherID: null,
             timeID: null,
+            dateID: null,
         }
     },
 
@@ -27,7 +28,7 @@ Ext.define('scheduleApp.view.main.addendum.AddendumModel', {
                 deep:true
             },
             get: function (form){
-                if (form.groupsID && form.subjectID && form.teacherID && form.timeID){
+                if (form.groupsID && form.subjectID && form.teacherID && form.timeID && form.dateID){
                     return ''
                 } else {
                     return 'true'

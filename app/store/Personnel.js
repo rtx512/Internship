@@ -14,27 +14,32 @@ Ext.define('scheduleApp.store.Personnel', {
                 1 : {
                     subject: 'матан',
                     group: 'КИ-21-01',
-                    cabinet:'2312'
+                    cabinet:'2312',
+                    teacher:'My teach1'
                 },
                 2 : {
                     subject: 'матан',
                     group: 'КИ-21-01',
-                    cabinet:'2204'
+                    cabinet:'2204',
+                    teacher:'My teach2'
                 },
                 3 : {
                     subject: 'матан',
                     group: 'КИ-21-01',
-                    cabinet:'2404'
+                    cabinet:'2404',
+                    teacher:'My teach3',
                 },
                 4 : {
                     subject: 'матан',
                     group: 'КИ-21-01',
-                    cabinet:'2404'
+                    cabinet:'2404',
+                    teacher:'My teach4'
                 },
                 5 : {
                     subject: 'матан',
                     group: 'КИ-21-01',
-                    cabinet: '2404'
+                    cabinet: '2404',
+                    teacher:'My teach3',
                 }
             },
         },
@@ -45,26 +50,31 @@ Ext.define('scheduleApp.store.Personnel', {
                     subject: 'не матан',
                     group: 'КИ-21-01',
                     cabinet: '2404',
+                    teacher:'My teach2'
                 },
                 2 : {
                     subject: 'матан',
                     group: 'КИ-21-01',
                     cabinet:'2404',
+                    teacher:'My teach1'
                 },
                 3 : {
                     subject: 'матан',
                     group: 'КИ-21-01',
                     cabinet:'2404',
+                    teacher:'My teach2'
                 },
                 4 : {
                     subject: 'матан',
                     group: 'КИ-21-01',
                     cabinet:'2404',
+                    teacher:'My teach3'
                 },
                 5 : {
                     subject: 'матан',
                     group: 'КИ-21-01',
                     cabinet:'2404',
+                    teacher:'My teach4'
                 }
             },
         },
