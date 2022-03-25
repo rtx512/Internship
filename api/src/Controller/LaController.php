@@ -32,7 +32,7 @@ class LaController extends AbstractController
     /**
      * @Route("test")
      */
-    function test():Response
+    function test(): Response
     {
         $My = $this->mainService->getTime();
         print_r($My[0]->name);
