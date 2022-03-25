@@ -7,21 +7,21 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table (name="time")
+ * @ORM\Table(name="time")
  */
 class TimeEntity
 {
     /**
-     * @ORM\Id ()
-     * @ORM\GeneratedValue ()
-     * @ORM\Column (name="id", type="integer")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(name="id", type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
-     * @ORM\Column (name="name", type="string")
+     * @ORM\Column(name="name", type="string")
      */
-    private $name;
+    private string $name;
 
     /**
      * @return int
@@ -32,7 +32,7 @@ class TimeEntity
     }
 
     /**
-     * return string
+     * @return string
      */
     public function getName(): string
     {
@@ -52,7 +52,7 @@ class TimeEntity
     /**
      * @return TimeDto
      */
-    public function toDto():TimeDto
+    public function toDto(): TimeDto
     {
         $dto = new TimeDto();
         $dto->id = $this->getId();

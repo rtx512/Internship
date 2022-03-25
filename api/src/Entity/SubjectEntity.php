@@ -11,15 +11,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SubjectEntity
 {
-    /**ORM
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(name = "id", type = "integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private int $id;
 
     /**
-     * @ORM\Column (name = "id", type = "string")
+     * @ORM\Column (name="name", type="string")
      */
     private string $name;
 
@@ -34,7 +34,7 @@ class SubjectEntity
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
