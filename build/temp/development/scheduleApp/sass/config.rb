@@ -1,1 +1,1 @@
-cache_path = '/home/alexey/PhpStormProjects/scheduleApp (копия)/build/.sass-cache'
+cache_path = '/home/alexey/PhpStormProjects/My progect/build/.sass-cache'

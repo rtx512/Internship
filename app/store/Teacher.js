@@ -1,10 +1,16 @@
 Ext.define('scheduleApp.store.Teacher',{
     extend:'Ext.data.Store',
     alias: 'store.teacher',
-    data: [
-        {id: 1, name: 'My teach1'},
-        {id: 2, name: 'My teach2'},
-        {id: 3, name: 'My teach3'},
-        {id: 4, name: 'My teach4'},
+    fields: [
+        {name: 'id', type: 'int'},
+        {name: 'id', type: 'string'}
     ],
-})
+    proxy: {
+        type: 'ajax',
+        url: 'http://127.0.0.1:8000/List/getTeachers',
+        reader: {
+            type: 'json',
+        }
+    },
+    autoLoad: true,
+});

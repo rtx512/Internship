@@ -14,7 +14,7 @@ Ext.define('scheduleApp.Application', {
         'scheduleApp.store.Groups',
         'scheduleApp.store.Teacher',
         'scheduleApp.store.Time',
-        'scheduleApp.store.Subject'
+        'scheduleApp.store.Subject',
     ],
 
     launch: function () {

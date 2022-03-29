@@ -1,10 +1,16 @@
 Ext.define('scheduleApp.store.Subject',{
     extend:'Ext.data.Store',
     alias:'store.subject',
-    data: [
-        {id: '1', name: 'sub1'},
-        {id: '2', name: 'sub2'},
-        {id: '3', name: 'sub3'},
-        {id: '4', name: 'sub4'},
-    ]
-})
+    fields: [
+        {name: 'id', type: 'int'},
+        {name: 'id', type: 'string'}
+    ],
+    proxy: {
+        type: 'ajax',
+        url: 'http://127.0.0.1:8000/List/getSubjects',
+        reader: {
+            type: 'json',
+        }
+    },
+    autoLoad: true,
+});

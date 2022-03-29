@@ -1,2 +1,2 @@
 // @tag full-page
-// @require /home/alexey/PhpStormProjects/scheduleApp (копия)/app.js
+// @require /home/alexey/PhpStormProjects/My progect/app.js

@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'scheduleApp' );
-$image-search-path: '/home/alexey/PhpStormProjects/scheduleApp (копия)/build/development/scheduleApp/resources';
+$image-search-path: '/home/alexey/PhpStormProjects/My progect/build/development/scheduleApp/resources';
 $theme-name:  dynamic( 'theme-triton' );
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
@@ -910,6 +910,9 @@ $include-ext-window-window: dynamic(true);;
 $include-scheduleapp-application: dynamic(true);;
 $include-scheduleapp-store-groups: dynamic(true);;
 $include-scheduleapp-store-personnel: dynamic(true);;
+$include-scheduleapp-store-subject: dynamic(true);;
+$include-scheduleapp-store-teacher: dynamic(true);;
+$include-scheduleapp-store-time: dynamic(true);;
 $include-scheduleapp-view-main-main: dynamic(true);;
 $include-scheduleapp-view-main-maincontroller: dynamic(true);;
 $include-scheduleapp-view-main-mainmodel: dynamic(true);;
