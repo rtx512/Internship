@@ -22,10 +22,11 @@ Ext.define('scheduleApp.view.main.list.List',  {
             store: 'scheduleApp.store.Groups',
             valueField: 'id',
             displayField: 'name',
-            queryMode: 'local',
+            queryMode: 'local'
         },
         {
             xtype: 'mainSchedule',
         }
     ]
 });
+

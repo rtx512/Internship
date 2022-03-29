@@ -13,7 +13,7 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
     },
 
     title:'Полная информация',
-    height:280,
+    height:305,
     width:300 ,
     modal: true,
 
@@ -43,6 +43,15 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
             margin:10,
             bind: {
                 value: '{schedule.cabinet}'
+            }
+        },
+        {
+            xtype: 'textfield',
+            fieldLabel:'Препод:',
+            readOnly:true,
+            margin:10,
+            bind: {
+                value: '{schedule.teacher}'
             }
         },
         {
