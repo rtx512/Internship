@@ -11,10 +11,12 @@ Ext.define('scheduleApp.Application', {
     },
 
     stores: [
+        'scheduleApp.store.Cabinet',
         'scheduleApp.store.Groups',
         'scheduleApp.store.Teacher',
         'scheduleApp.store.Time',
         'scheduleApp.store.Subject',
+        'scheduleApp.store.Period'
     ],
 
     launch: function () {

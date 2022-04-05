@@ -6,6 +6,7 @@ use App\Entity\GroupEntity;
 use App\Entity\TeacherEntity;
 use App\Entity\TimeEntity;
 use App\Entity\SubjectEntity;
+use App\Entity\CabinetEntity;
 use Doctrine\ORM\EntityManagerInterface;
 
 class MainService
@@ -22,12 +23,12 @@ class MainService
         $groups = $this->entityManager->getRepository(GroupEntity::class)
             ->findAll();
 
-        $groupDtos = [];
+        $groupDto = [];
         /** @var GroupEntity $group */
         foreach ($groups as $group) {
-            $groupDtos[] = $group->toDto();
+            $groupDto[] = $group->toDto();
         }
-        return $groupDtos;
+        return $groupDto;
     }
     public function getTeacher(): array
     {
@@ -66,5 +67,18 @@ class MainService
             $subjectDot[] = $subject->toDto();
         }
         return $subjectDot;
+    }
+
+    public function getCabinet():array
+    {
+        $cabinets = $this->entityManager->getRepository(CabinetEntity::class)->findAll();
+
+        $cabinetDto = [];
+        /** @var CabinetEntity $cabinet */
+        foreach ($cabinets as $cabinet)
+        {
+            $cabinetDto[] = $cabinet->toDto();
+        }
+        return $cabinetDto;
     }
 }

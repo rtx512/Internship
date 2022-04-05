@@ -8,7 +8,7 @@ Ext.define('scheduleApp.store.Groups', {
     ],
     proxy: {
         type: 'ajax',
-        url: 'http://127.0.0.1:8000/List/getGroups',
+        url: 'https://127.0.0.1:8000/List/getGroups',
         reader: {
             type: 'json',
         }

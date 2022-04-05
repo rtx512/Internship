@@ -1,5 +1,5 @@
 Ext.define('scheduleApp.view.main.addendum.Addendum', {
-    extend:'Ext.form.Panel',
+    extend: 'Ext.form.Panel',
     xtype: 'mainAddendum',
     requires: [
         'scheduleApp.store.Personnel',
@@ -10,12 +10,14 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
     ],
     controller: 'addendum',
     viewModel: 'addendum',
-    title:'Добавление новой пары',
+    title: 'Добавление новой пары',
     items: [
         {
-            margin:10,
-            xtype:'combobox',
-            fieldLabel:'Группа:',
+            margin: 10,
+            xtype: 'combobox',
+            itemId:'groupsID',
+            name: 'groupsID',
+            fieldLabel: 'Группа:',
             emptyText: 'Выберите группу',
             store: 'scheduleApp.store.Groups',
             valueField: 'id',
@@ -28,8 +30,10 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
 
         },
         {
-            margin:10,
-            xtype:'combo',
+            margin: 10,
+            xtype: 'combo',
+            itemId:'subjectID',
+            name: 'subjectID',
             fieldLabel: 'Предмет:',
             emptyText: 'Выберите предмет',
             store: 'scheduleApp.store.Subject',
@@ -41,8 +45,25 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             }
         },
         {
-            margin:10,
-            xtype:'combo',
+            margin: 10,
+            xtype: 'combobox',
+            itemId: 'cabinetID',
+            name:'cabinetID',
+            fieldLabel: 'Кабинет:',
+            emptyText: 'Выберите кабинет',
+            store: 'scheduleApp.store.Cabinet',
+            valueField: 'id',
+            displayField: 'name',
+            queryMode: 'local',
+            bind: {
+                value: "{form.cabinetID}",
+            }
+        },
+        {
+            margin: 10,
+            xtype: 'combo',
+            itemId: 'teacherID',
+            name: 'teacherID',
             fieldLabel: 'Препод:',
             emptyText: 'Выберите преподавателя',
             store: 'scheduleApp.store.Teacher',
@@ -54,8 +75,10 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             }
         },
         {
-            margin:10,
-            xtype:'combo',
+            margin: 10,
+            xtype: 'combo',
+            name: 'timeID',
+            itemId: 'timeID',
             fieldLabel: 'Время:',
             emptyText: 'Выберите время',
             store: 'scheduleApp.store.Time',
@@ -71,15 +94,16 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             xtype: 'datefield',
             fieldLabel: 'Дата',
             name: 'date',
+            itemId: 'date',
             format: 'd.m.Y',
             altFormats: 'd,m,Y|d.m.Y',
             bind: {
-                value: '{form.dateID}'
+                value: '{form.date}'
             }
         },
         {
             margin: 10,
-            xtype:'checkbox',
+            xtype: 'checkbox',
             fieldLabel: 'Повторять:',
             bind: {
                 value: '{form.checkbox}'
@@ -87,26 +111,37 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
         },
         {
             margin: 10,
-            xtype:'textfield',
+            xtype: 'combo',
             fieldLabel: 'Переодичность:',
+            name: 'period',
+            itemId: 'period',
+            store: 'scheduleApp.store.Period',
+            valueField: 'id',
+            displayField: 'name',
             bind: {
                 disabled: '{checkboxChecked}'
             }
         },
         {
-            margin:10,
-            xtype:'textfield',
-            fieldLabel: 'Сколько недель:',
+            margin: 10,
+            xtype: 'textfield',
+            name: 'manyCouples',
+            fieldLabel: 'Сколько пар:',
             bind: {
                 disabled: '{checkboxChecked}'
             },
         },
-            {
-                xtype: 'button',
-                text: 'Добавить',
-                bind: {
-                    disabled: '{addForm}',
-                },
+        {
+            xtype: 'button',
+            text: 'Добавить',
+            bind: {
+                disabled: '{addForm}',
+            },
+            handler: function() {
+                this.up().getForm().submit({
+                    url: 'https://127.0.0.1:8000/Grid/setSchedule',
+                });
             }
-    ]
+        }
+    ],
 });

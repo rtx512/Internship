@@ -52,4 +52,14 @@ class ListController extends AbstractController
         $Times = $this->mainService->getTime();
         return new JsonResponse($Times);
     }
+
+    /**
+     * @Route("List/getCabinet")
+     */
+    public function getCabinet(): Response
+    {
+        $Cabinet = $this->mainService->getCabinet();
+        return new JsonResponse($Cabinet);
+    }
+
 }
