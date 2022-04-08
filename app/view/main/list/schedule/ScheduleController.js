@@ -4,7 +4,11 @@ Ext.define('scheduleApp.view.main.schedule.ScheduleController', {
     alias: 'controller.schedule',
 
     ren: function(value, a, b, c, colIndex) {
-        return value[colIndex].subject
+        if (value[colIndex] !== null) {
+            return value[colIndex].subject.name
+        } else {
+            return null
+        }
     },
 
     cellClick: function(me, td, cellIndex, record,tr,rowIndex) {
@@ -13,13 +17,15 @@ Ext.define('scheduleApp.view.main.schedule.ScheduleController', {
         }
 
         let cellData = me.getSelectionModel().getSelection()[0].get('days')[cellIndex];
-        cellData.times = me.getSelectionModel().getSelection()[0].get('time');
-        Ext.create('scheduleApp.view.main.list.detailWin.Detail', {
-            viewModel: {
-                data: {
-                    schedule: cellData,
+        if (cellData != null){
+            cellData.times = me.getSelectionModel().getSelection()[0].get('time');
+            Ext.create('scheduleApp.view.main.list.detailWin.Detail', {
+                viewModel: {
+                    data: {
+                        schedule: cellData,
+                    }
                 }
-            }
-        }).show()
+            }).show()
+        }
     },
 });

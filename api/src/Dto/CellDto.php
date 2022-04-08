@@ -2,13 +2,11 @@
 
 namespace App\Dto;
 
-class GridScheduleDto
+class CellDto
 {
     public int $id;
 
     public string $date;
-
-    public int $day;
 
     public CabinetDto $cabinet;
 
@@ -17,6 +15,4 @@ class GridScheduleDto
     public SubjectDto $subject;
 
     public TeacherDto $teacher;
-
-    public TimeDto $time;
 }

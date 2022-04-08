@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\GridScheduleEntity;
 use App\Service\GridScheduleService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,10 +23,12 @@ class GridScheduleController extends AbstractController
     /**
      * @Route("Grid/getSchedule")
      */
-    public function getSchedule(): Response
+    public function getSchedule(Request $request): Response
     {
-        $Schedule = $this->gridScheduleService->getSchedule();
-        return new JsonResponse($Schedule);
+        $groupId = $request->get('groupId');
+        $date = $request->get('date');
+        $schedule = $this->gridScheduleService->getSchedule($groupId,$date);
+        return new JsonResponse($schedule);
     }
 
     /**
@@ -32,8 +37,8 @@ class GridScheduleController extends AbstractController
     public function setSchedule(): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $Schedule = $this->gridScheduleService->setSchedule($_POST);
-        $entityManager->persist($Schedule);
+        $schedule = $this->gridScheduleService->setSchedule($_POST);
+        $entityManager->persist($schedule);
         $entityManager->flush();
 
         if (array_key_exists("undefined",$_POST))
@@ -55,12 +60,24 @@ class GridScheduleController extends AbstractController
                     );
                 }
 
-                $Schedule = $this->gridScheduleService->setSchedule($_POST);
-                $entityManager->persist($Schedule);
+                $schedule = $this->gridScheduleService->setSchedule($_POST);
+                $entityManager->persist($schedule);
                 $entityManager->flush();
             }
         }
-        return new JsonResponse($Schedule->getDate());
+        return new JsonResponse($schedule->getDate());
+    }
+
+    /**
+     * @Route ("Grid/deleteSchedule")
+     */
+    public function deleteSchedule(Request $request):Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $para = $entityManager->getRepository(GridScheduleEntity::class)->find($request->get('id'));
+        $entityManager->remove($para);
+        $entityManager->flush();
+        return new JsonResponse('Ok');
     }
 
 }

@@ -15,8 +15,8 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
         {
             margin: 10,
             xtype: 'combobox',
-            itemId:'groupsID',
-            name: 'groupsID',
+            itemId:'groupsId',
+            name: 'groupsId',
             fieldLabel: 'Группа:',
             emptyText: 'Выберите группу',
             store: 'scheduleApp.store.Groups',
@@ -32,8 +32,8 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
         {
             margin: 10,
             xtype: 'combo',
-            itemId:'subjectID',
-            name: 'subjectID',
+            itemId:'subjectId',
+            name: 'subjectId',
             fieldLabel: 'Предмет:',
             emptyText: 'Выберите предмет',
             store: 'scheduleApp.store.Subject',
@@ -47,8 +47,8 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
         {
             margin: 10,
             xtype: 'combobox',
-            itemId: 'cabinetID',
-            name:'cabinetID',
+            itemId: 'cabinetId',
+            name:'cabinetId',
             fieldLabel: 'Кабинет:',
             emptyText: 'Выберите кабинет',
             store: 'scheduleApp.store.Cabinet',
@@ -62,8 +62,8 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
         {
             margin: 10,
             xtype: 'combo',
-            itemId: 'teacherID',
-            name: 'teacherID',
+            itemId: 'teacherId',
+            name: 'teacherId',
             fieldLabel: 'Препод:',
             emptyText: 'Выберите преподавателя',
             store: 'scheduleApp.store.Teacher',
@@ -77,8 +77,8 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
         {
             margin: 10,
             xtype: 'combo',
-            name: 'timeID',
-            itemId: 'timeID',
+            name: 'timeId',
+            itemId: 'timeId',
             fieldLabel: 'Время:',
             emptyText: 'Выберите время',
             store: 'scheduleApp.store.Time',
@@ -119,6 +119,7 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             valueField: 'id',
             displayField: 'name',
             bind: {
+                value: '{form.period}',
                 disabled: '{checkboxChecked}'
             }
         },
@@ -128,6 +129,7 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             name: 'manyCouples',
             fieldLabel: 'Сколько пар:',
             bind: {
+                value: '{form.manyCouples}',
                 disabled: '{checkboxChecked}'
             },
         },
@@ -138,7 +140,7 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
                 disabled: '{addForm}',
             },
             handler: function() {
-                this.up().getForm().submit({
+                this.up().submit({
                     url: 'https://127.0.0.1:8000/Grid/setSchedule',
                 });
             }

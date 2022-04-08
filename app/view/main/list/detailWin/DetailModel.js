@@ -3,7 +3,7 @@ Ext.define('scheduleApp.view.main.list.detailWin.DetailModel', {
 
     alias: 'viewmodel.detailWin',
 
-    data: {
+    /*data: {
         schedule: {}
-    }
+    }*/
 });

@@ -1,7 +1,10 @@
 Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
     extend: 'Ext.window.Window',
+    itemId: 'detailWindow',
+    id:'test',
     requires:[
-        'scheduleApp.store.Personnel',
+        'scheduleApp.store.Schedule',
+
         'scheduleApp.view.main.list.detailWin.DetailController',
         'scheduleApp.view.main.list.detailWin.DetailModel'
     ],
@@ -9,68 +12,113 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
     viewModel: 'detailWin',
 
     store:{
-        type: 'personnel',
+        type: 'schedule',
     },
 
     title:'Полная информация',
-    height:305,
+    height:350,
     width:300 ,
     modal: true,
 
     items:[
         {
-            xtype: 'textfield',
+            xtype: 'combobox',
             fieldLabel:'Группа:',
-            readOnly:true,
+            store: 'scheduleApp.store.Groups',
+            valueField: 'id',
+            displayField: 'name',
             margin:10,
             bind: {
-                value: '{schedule.group}'
+                emptyText: '{schedule.group.name}'
             }
         },
         {
-            xtype: 'textfield',
+            xtype: 'combobox',
             fieldLabel:'Прредмет:',
-            readOnly:true,
+            // store: 'scheduleApp.store.Subject',
+            // valueField: 'id',
+            // displayField: 'name',
             margin:10,
             bind: {
-                value: '{schedule.subject}'
+                value: '{schedule.subject.name}'
             }
         },
         {
-            xtype: 'textfield',
+            xtype: 'combobox',
             fieldLabel:'Кабинет:',
-            readOnly:true,
+            // store: 'scheduleApp.store.Cabinet',
+            // valueField: 'id',
+            // displayField: 'name',
             margin:10,
             bind: {
-                value: '{schedule.cabinet}'
+                value: '{schedule.cabinet.name}'
             }
         },
         {
-            xtype: 'textfield',
+            xtype: 'combobox',
             fieldLabel:'Препод:',
-            readOnly:true,
+            // store: 'scheduleApp.store.Teacher',
+            // valueField: 'id',
+            // displayField: 'name',
             margin:10,
             bind: {
-                value: '{schedule.teacher}'
+                value: '{schedule.teacher.name}'
+            }
+        },
+        {
+            xtype: 'combobox',
+            fieldLabel:'Время:',
+            //store: 'scheduleApp.store.Time',
+            //valueField: 'id',
+            //displayField: 'name',
+            margin:10,
+            bind: {
+                value: '{schedule.times.name}'
+            }
+        },
+        {
+            xtype: 'datefield',
+            fieldLabel:'Дата:',
+            format: 'd.m.Y',
+            margin:10,
+            bind: {
+                value: '{schedule.date}'
             }
         },
         {
             xtype: 'textfield',
-            fieldLabel:'Время:',
-            readOnly:true,
+            fieldLabel: 'id',
+            itemId: 'scheduleId',
             margin:10,
             bind: {
-                value: '{schedule.times}'
-            }
+                value: '{schedule.id}'
+            },
+            hidden: true
         },
-
     ],
     buttons: [
-            {
+        {
+            xtype: 'button',
+            text: 'Сохранить',
+            listeners: {
+                click: 'getEditing',
+            }
+        },
+        {
+            xtype: 'button',
+            text: 'удалить',
+            /*bind: {
+                value: '{schedule.id}'
+            },*/
+            listeners: {
+                click: 'deletePara'
+            }
+        },
+        {
                 xtype: 'button',
-                text: 'закрыть',
+                text: 'отмена',
                 listeners: {
-                    click: 'closeDetail',
+                    click: 'cancelEditing',
                 }
             },
         ]

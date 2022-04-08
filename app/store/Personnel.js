@@ -4,7 +4,7 @@ Ext.define('scheduleApp.store.Personnel', {
     alias: 'store.personnel',
 
     fields: [
-        '№', 'Понидельник', 'Вторник', 'Среда', 'Четверг', 'Пятница'
+        '№', 'Понидельник', 'Вторник', 'Среда', 'Четверг', 'Пятница','Субота','Воскресенье'
     ],
 
     data: {
@@ -37,6 +37,18 @@ Ext.define('scheduleApp.store.Personnel', {
                         teacher: 'My teach4'
                     },
                     5: {
+                        subject: 'матан',
+                        group: 'КИ-21-01',
+                        cabinet: '2404',
+                        teacher: 'My teach3',
+                    },
+                    6: {
+                        subject: 'матан',
+                        group: 'КИ-21-01',
+                        cabinet: '2404',
+                        teacher: 'My teach3',
+                    },
+                    0: {
                         subject: 'матан',
                         group: 'КИ-21-01',
                         cabinet: '2404',
