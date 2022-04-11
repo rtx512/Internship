@@ -105,6 +105,7 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             margin: 10,
             xtype: 'checkbox',
             fieldLabel: 'Повторять:',
+            name: 'isRepeatable',
             bind: {
                 value: '{form.checkbox}'
             }
@@ -139,10 +140,8 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             bind: {
                 disabled: '{addForm}',
             },
-            handler: function() {
-                this.up().submit({
-                    url: 'https://127.0.0.1:8000/Grid/setSchedule',
-                });
+            listeners: {
+                click: 'addPara',
             }
         }
     ],

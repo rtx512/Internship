@@ -27,57 +27,72 @@ class GridScheduleController extends AbstractController
     {
         $groupId = $request->get('groupId');
         $date = $request->get('date');
-        $schedule = $this->gridScheduleService->getSchedule($groupId,$date);
+        $schedule = $this->gridScheduleService->getSchedule($groupId, $date);
         return new JsonResponse($schedule);
     }
 
     /**
      * @Route("Grid/setSchedule")
      */
-    public function setSchedule(): Response
+    public function setSchedule(Request $request): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $schedule = $this->gridScheduleService->setSchedule($_POST);
-        $entityManager->persist($schedule);
-        $entityManager->flush();
-
-        if (array_key_exists("undefined",$_POST))
-        {
-            for ($i = 1; $i < $_POST['manyCouples'];$i++)
-            {
-                if ($_POST['period'] == 2)
-                {
-                    $_POST['date'] = date(
-                        'd.m.Y',
-                        strtotime('+14 day', strtotime($_POST['date']))
-                    );
-                }
-                else
-                {
-                    $_POST['date'] = date(
-                        'd.m.Y',
-                        strtotime('+7 day', strtotime($_POST['date']))
-                    );
-                }
-
-                $schedule = $this->gridScheduleService->setSchedule($_POST);
-                $entityManager->persist($schedule);
-                $entityManager->flush();
-            }
+        try {
+            $this->gridScheduleService->saveSchedule($_POST);
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ], 500);
         }
-        return new JsonResponse($schedule->getDate());
+        return new JsonResponse([
+            'success' => true,
+            'message' => 'Сохранение прошло успешно!'
+        ], 200);
     }
 
     /**
      * @Route ("Grid/deleteSchedule")
      */
-    public function deleteSchedule(Request $request):Response
+    public function deleteSchedule(Request $request): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $para = $entityManager->getRepository(GridScheduleEntity::class)->find($request->get('id'));
-        $entityManager->remove($para);
-        $entityManager->flush();
-        return new JsonResponse('Ok');
+        try {
+            $this->gridScheduleService->deleteSchedule($request->get('id'));
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ], 500);
+        }
+        return new JsonResponse([
+            'success' => true,
+            'message' => 'Удаление прошло успешно!'
+        ], 200);
     }
 
+    /**
+     * @Route ("Grid/updateSchedule")
+     */
+    public function updateSchedule(Request $request): Response
+    {
+        try {
+            $this->gridScheduleService->setSchedule($_POST);
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ], 500);
+        }
+        return new JsonResponse([
+            'success' => true,
+            'message' => 'Изменение прошло успешно!'
+        ], 200);
+    }
+
+    /**
+     * @Route("Grid/printSchedule")
+     */
+    public function printSchedule()
+    {
+        $this->gridScheduleService->printSchedule();
+    }
 }

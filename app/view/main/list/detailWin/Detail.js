@@ -1,7 +1,6 @@
 Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
     extend: 'Ext.window.Window',
     itemId: 'detailWindow',
-    id:'test',
     requires:[
         'scheduleApp.store.Schedule',
 
@@ -15,7 +14,7 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
         type: 'schedule',
     },
 
-    title:'Полная информация',
+    title:'Редактирование',
     height:350,
     width:300 ,
     modal: true,
@@ -24,61 +23,68 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
         {
             xtype: 'combobox',
             fieldLabel:'Группа:',
+            itemId: 'groupId',
             store: 'scheduleApp.store.Groups',
             valueField: 'id',
             displayField: 'name',
             margin:10,
+            autoSelect: true,
             bind: {
-                emptyText: '{schedule.group.name}'
+                value: '{schedule.group.id}'
             }
         },
         {
             xtype: 'combobox',
             fieldLabel:'Прредмет:',
-            // store: 'scheduleApp.store.Subject',
-            // valueField: 'id',
-            // displayField: 'name',
+            itemId: 'subjectId',
+            store: 'scheduleApp.store.Subject',
+            valueField: 'id',
+            displayField: 'name',
             margin:10,
             bind: {
-                value: '{schedule.subject.name}'
+                value: '{schedule.subject.id}'
             }
         },
         {
             xtype: 'combobox',
             fieldLabel:'Кабинет:',
-            // store: 'scheduleApp.store.Cabinet',
-            // valueField: 'id',
-            // displayField: 'name',
+            itemId: 'cabinetId',
+            store: 'scheduleApp.store.Cabinet',
+            valueField: 'id',
+            displayField: 'name',
             margin:10,
             bind: {
-                value: '{schedule.cabinet.name}'
+                value: '{schedule.cabinet.id}'
             }
         },
         {
             xtype: 'combobox',
             fieldLabel:'Препод:',
-            // store: 'scheduleApp.store.Teacher',
-            // valueField: 'id',
-            // displayField: 'name',
+            itemId: 'teacherId',
+            store: 'scheduleApp.store.Teacher',
+            valueField: 'id',
+            displayField: 'name',
             margin:10,
             bind: {
-                value: '{schedule.teacher.name}'
+                value: '{schedule.teacher.id}'
             }
         },
         {
             xtype: 'combobox',
             fieldLabel:'Время:',
-            //store: 'scheduleApp.store.Time',
-            //valueField: 'id',
-            //displayField: 'name',
+            itemId: 'timeId',
+            store: 'scheduleApp.store.Time',
+            valueField: 'id',
+            displayField: 'name',
             margin:10,
             bind: {
-                value: '{schedule.times.name}'
+                value: '{schedule.times.id}'
             }
         },
         {
             xtype: 'datefield',
             fieldLabel:'Дата:',
+            itemId: 'date',
             format: 'd.m.Y',
             margin:10,
             bind: {
@@ -107,9 +113,6 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
         {
             xtype: 'button',
             text: 'удалить',
-            /*bind: {
-                value: '{schedule.id}'
-            },*/
             listeners: {
                 click: 'deletePara'
             }
@@ -121,5 +124,5 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
                     click: 'cancelEditing',
                 }
             },
-        ]
+        ],
 })

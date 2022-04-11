@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Dto\IdNameDto;
 use App\Entity\GroupEntity;
 use App\Entity\TeacherEntity;
 use App\Entity\TimeEntity;
@@ -23,62 +24,68 @@ class MainService
         $groups = $this->entityManager->getRepository(GroupEntity::class)
             ->findAll();
 
-        $groupDto = [];
+        $groupDtos = [];
         /** @var GroupEntity $group */
         foreach ($groups as $group) {
-            $groupDto[] = $group->toDto();
+            $groupDtos[] = $group->toDto();
         }
-        return $groupDto;
+        return $groupDtos;
     }
-    public function getTeacher(): array
+
+    public function getTeachers(): array
     {
-        $teacher = $this->entityManager->getRepository(TeacherEntity::class)->findAll();
+        $teachers = $this->entityManager->getRepository(TeacherEntity::class)->findAll();
 
-        $teacherDot=[];
-        /** @var TeacherEntity $teach */
-        foreach ($teacher as $teach)
-        {
-            $teacherDot[]=$teach->toDto();
+        $teacherDtos = [];
+        /** @var TeacherEntity $teacher */
+        foreach ($teachers as $teacher) {
+            $teacherDtos[] = $teacher->toDto();
         }
-        return $teacherDot;
+        return $teacherDtos;
     }
 
-    public function getTime(): array
+    /**
+     * @return IdNameDto[]
+     */
+    public function getTimes(): array
     {
         $times = $this->entityManager->getRepository(TimeEntity::class)->findAll();
 
-        $timeDot=[];
+        $timeDtos = [];
         /** @var TimeEntity $time */
-        foreach ($times as $time)
-        {
-            $timeDot[] = $time->toDto();
+        foreach ($times as $time) {
+            $timeDtos[] = $time->toDto();
         }
-        return $timeDot;
+        return $timeDtos;
     }
 
-    public function getSubject(): array
+    /**
+     * @return array
+     */
+    public function getSubjects(): array
     {
         $subjects = $this->entityManager->getRepository(SubjectEntity::class)->findAll();
 
-        $subjectDot = [];
+        $subjectDtos = [];
         /** @var SubjectEntity $subject */
-        foreach ($subjects as $subject)
-        {
-            $subjectDot[] = $subject->toDto();
+        foreach ($subjects as $subject) {
+            $subjectDtos[] = $subject->toDto();
         }
-        return $subjectDot;
+        return $subjectDtos;
     }
 
-    public function getCabinet():array
+    /**
+     * @return array
+     */
+    public function getCabinets(): array
     {
         $cabinets = $this->entityManager->getRepository(CabinetEntity::class)->findAll();
 
-        $cabinetDto = [];
+        $cabinetDtos = [];
         /** @var CabinetEntity $cabinet */
-        foreach ($cabinets as $cabinet)
-        {
-            $cabinetDto[] = $cabinet->toDto();
+        foreach ($cabinets as $cabinet) {
+            $cabinetDtos[] = $cabinet->toDto();
         }
-        return $cabinetDto;
+        return $cabinetDtos;
     }
 }

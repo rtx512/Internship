@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Dto\CellDto;
 use App\Dto\GridScheduleDto;
+use App\Dto\GroupDto;
 use App\Dto\RowDto;
 use App\Entity\CabinetEntity;
 use App\Entity\GridScheduleEntity;
@@ -12,6 +13,8 @@ use App\Entity\SubjectEntity;
 use App\Entity\TeacherEntity;
 use App\Entity\TimeEntity;
 use Doctrine\ORM\EntityManagerInterface;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 
 class GridScheduleService
@@ -23,37 +26,38 @@ class GridScheduleService
         $this->entityManager = $entityManager;
     }
 
-    public function getSchedule($groupId,$date):array
+    /**
+     * @param int $groupId
+     * @param string $date
+     * @return array
+     */
+    public function getSchedule(int $groupId, string $date): array
     {
-        $items = $this->entityManager->createQueryBuilder()
-            ->select('s')
-            ->from(GridScheduleEntity::class, 's')
-            ->where('s.group = :groupId')
-            ->setParameter('groupId', $groupId)
-            ->getQuery()
-            ->getResult();
-
         $dateStart = date(
             'Y.m.d',
             strtotime($date),
         );
-        $dateNext = date(
+        $dateEnd = date(
             'Y.m.d',
             strtotime('+7 days', strtotime($date)),
         );
 
-        $itemDto = [];
+        $items = $this->entityManager->createQueryBuilder()
+            ->select('s')
+            ->from(GridScheduleEntity::class, 's')
+            ->where('s.group = :groupId')
+            ->andWhere('s.date >= :startDate')
+            ->andWhere('s.date < :endDate')
+            ->setParameter('groupId', $groupId)
+            ->setParameter('startDate', $dateStart)
+            ->setParameter('endDate', $dateEnd)
+            ->getQuery()
+            ->getResult();
+
+        $itemDtos = [];
         /** @var GridScheduleEntity $item */
-        foreach ($items as $item)
-        {
-            $item = $item->toDto();
-            $itemDate = date(
-                'Y.m.d',
-                strtotime($item->date)
-            );
-            if (($itemDate >= $dateStart) && ($itemDate < $dateNext)){
-                $itemDto[] = $item;
-            }
+        foreach ($items as $item) {
+            $itemDtos[] = $item->toDto();
         }
 
         $times = $this->entityManager->getRepository(TimeEntity::class)
@@ -61,8 +65,7 @@ class GridScheduleService
 
         $result = [];
         /** @var TimeEntity $time */
-        foreach ($times as $time)
-        {
+        foreach ($times as $time) {
             $rowDto = new RowDto();
             $rowDto->time = $time->toDto();
             $rowDto->days = [
@@ -73,39 +76,69 @@ class GridScheduleService
                 4 => null,
                 5 => null,
                 6 => null,
-                7=> null,
+                7 => null,
             ];
             $result[$time->getId()] = $rowDto;
         }
 
-        $itemCellDto = [];
+        $itemCellDtos = [];
         /** @var GridScheduleEntity $item */
-        foreach ($items as $item)
-        {
-            $item = $item->toCellDto();
-            $itemDate = date(
-                'Y.m.d',
-                strtotime($item->date)
-            );
-            if (($itemDate >= $dateStart) && ($itemDate < $dateNext)){
-                $itemCellDto[] = $item;
-            }
+        foreach ($items as $item) {
+            $itemCellDtos[] = $item->toCellDto();
         }
-        //print_r($itemCellDto);
-        //print_r($itemDto);
-        //print_r('Hello');
-        //var_dump($result);
         $i = 0;
-        foreach ($itemCellDto as $item){
-            $result[($itemDto[$i]->time->id)]->days[$itemDto[$i]->day] = $item;
+        foreach ($itemCellDtos as $itemCellDto) {
+            $result[($itemDtos[$i]->time->id)]->days[$itemDtos[$i]->day] = $itemCellDto;
             $i += 1;
         }
         return array_values($result);
     }
 
-    public function setSchedule($post)
+    /**
+     * @param array $post
+     * @return void
+     * @throws \Exception
+     */
+    public function saveSchedule(array $post)
     {
-        $schedule = new GridScheduleEntity();
+        $this->entityManager->beginTransaction();
+        try {
+            $this->setSchedule($post);
+            if (array_key_exists('isRepeatable', $post)) {
+                for ($i = 1; $i < $post['manyCouples']; $i++) {
+                    if ($post['period'] == 2) {
+                        $post['date'] = date(
+                            'd.m.Y',
+                            strtotime('+14 day', strtotime($post['date']))
+                        );
+                    } else {
+                        $post['date'] = date(
+                            'd.m.Y',
+                            strtotime('+7 day', strtotime($post['date']))
+                        );
+                    }
+                    $this->setSchedule($post);
+                }
+            }
+            $this->entityManager->flush();
+            $this->entityManager->commit();
+        } catch (\Exception $exception) {
+            $this->entityManager->rollback();
+            throw new \Exception('Ошибка при сохранении!');
+        }
+    }
+
+    /**
+     * @param array $post
+     * @return void
+     */
+    public function setSchedule(array $post)
+    {
+        if (isset($post['id'])) {
+            $schedule = $this->entityManager->getRepository(GridScheduleEntity::class)->find($post['id']);
+        } else {
+            $schedule = new GridScheduleEntity();
+        }
 
         $group = $this->entityManager->getRepository(GroupEntity::class)->find($post['groupsId']);
         $schedule->setGroup($group);
@@ -123,7 +156,29 @@ class GridScheduleService
         $schedule->setTime($time);
 
         $schedule->setDate($post['date']);
-        return $schedule;
+
+        $this->entityManager->persist($schedule);
+        $this->entityManager->flush();
     }
 
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function deleteSchedule(int $id)
+    {
+        $para = $this->entityManager->getRepository(GridScheduleEntity::class)->find($id);
+        $this->entityManager->remove($para);
+        $this->entityManager->flush();
+    }
+
+    public function printSchedule()
+    {
+        $loader = new FilesystemLoader(__DIR__ . '/../../templates/my');
+        $twig = new Environment($loader);
+        $template = $twig->load('test.html.twig');
+
+        echo $template->render(['text' => 'hi']);
+        die();
+    }
 }

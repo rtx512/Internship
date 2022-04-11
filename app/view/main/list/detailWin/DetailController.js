@@ -9,8 +9,27 @@ Ext.define('scheduleApp.view.main.list.detailWin.DetailController', {
     cancelEditing: function (me){
         me.up('window').close()
     },
-    getEditing: function (){
 
+    getEditing: function (me){
+        let detailWindow = me.up('#detailWindow');
+
+        Ext.Ajax.request({
+            url: 'https://127.0.0.1:8000/Grid/updateSchedule',
+            params: {
+                groupsId: detailWindow.down('#groupId').getValue(),
+                subjectId: detailWindow.down('#subjectId').getValue(),
+                cabinetId: detailWindow.down('#cabinetId').getValue(),
+                teacherId: detailWindow.down('#teacherId').getValue(),
+                timeId: detailWindow.down('#timeId').getValue(),
+                date: detailWindow.down('#date').getRawValue(),
+                id: detailWindow.down('#scheduleId').getValue(),
+            },
+            success: function () {
+                detailWindow.close();
+                Ext.ComponentQuery.query('mainSchedule')[0].getStore().reload();
+                // detailWindow.schedule.reload();
+            }
+        })
     },
 
     deletePara: function (me) {
@@ -22,7 +41,7 @@ Ext.define('scheduleApp.view.main.list.detailWin.DetailController', {
             },
             success: function () {
                 detailWindow.close();
-                debugger;
+                //debugger;
                 Ext.ComponentQuery.query('mainSchedule')[0].getStore().reload();
                 // detailWindow.schedule.reload();
             }
