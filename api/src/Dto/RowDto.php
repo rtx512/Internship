@@ -4,6 +4,6 @@ namespace App\Dto;
 
 class RowDto
 {
-    public TimeDto $time;
+    public IdNameDto $time;
     public array $days = [];
 }

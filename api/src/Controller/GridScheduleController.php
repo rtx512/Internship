@@ -91,8 +91,10 @@ class GridScheduleController extends AbstractController
     /**
      * @Route("Grid/printSchedule")
      */
-    public function printSchedule()
+    public function printSchedule(Request $request)
     {
-        $this->gridScheduleService->printSchedule();
+        $groupId = $request->get('groupId');
+        $date = $request->get('date');
+        $this->gridScheduleService->printSchedule($groupId, $date);
     }
 }

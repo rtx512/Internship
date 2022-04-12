@@ -10,13 +10,13 @@ class GridScheduleDto
 
     public int $day;
 
-    public CabinetDto $cabinet;
+    public IdNameDto $cabinet;
 
-    public GroupDto $group;
+    public IdNameDto $group;
 
-    public SubjectDto $subject;
+    public IdNameDto $subject;
 
-    public TeacherDto $teacher;
+    public IdNameDto $teacher;
 
-    public TimeDto $time;
+    public IdNameDto $time;
 }

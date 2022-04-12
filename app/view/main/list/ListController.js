@@ -25,5 +25,17 @@ Ext.define('scheduleApp.view.main.list.ListController', {
                 }
             });
         }
+    },
+
+    getTableSchedule: function (me) {
+        me = me.up('mainlist');
+        if ((me.down('datefield').lastValue != null) && (me.down('combobox').getValue() != null)) {
+            window.open(
+                'https://127.0.0.1:8000/Grid/printSchedule?'
+                + 'groupId=' + me.down('combobox').getValue()
+                + '&date=' + me.down('datefield').lastValue
+            );
+        }
     }
+
 });

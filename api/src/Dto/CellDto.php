@@ -8,11 +8,11 @@ class CellDto
 
     public string $date;
 
-    public CabinetDto $cabinet;
+    public IdNameDto $cabinet;
 
-    public GroupDto $group;
+    public IdNameDto $group;
 
-    public SubjectDto $subject;
+    public IdNameDto $subject;
 
-    public TeacherDto $teacher;
+    public IdNameDto $teacher;
 }

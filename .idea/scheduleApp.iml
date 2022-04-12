@@ -64,6 +64,10 @@
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/friendsofphp/proxy-manager-lts" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/nelmio/cors-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/phenx/php-font-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/dompdf/dompdf" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/phenx/php-svg-lib" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/sabberworm/php-css-parser" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

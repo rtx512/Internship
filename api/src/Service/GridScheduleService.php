@@ -2,9 +2,6 @@
 
 namespace App\Service;
 
-use App\Dto\CellDto;
-use App\Dto\GridScheduleDto;
-use App\Dto\GroupDto;
 use App\Dto\RowDto;
 use App\Entity\CabinetEntity;
 use App\Entity\GridScheduleEntity;
@@ -13,6 +10,8 @@ use App\Entity\SubjectEntity;
 use App\Entity\TeacherEntity;
 use App\Entity\TimeEntity;
 use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -69,7 +68,7 @@ class GridScheduleService
             $rowDto = new RowDto();
             $rowDto->time = $time->toDto();
             $rowDto->days = [
-                0 => null,
+                0 => "Hello",
                 1 => null,
                 2 => null,
                 3 => null,
@@ -172,13 +171,23 @@ class GridScheduleService
         $this->entityManager->flush();
     }
 
-    public function printSchedule()
+    public function printSchedule(int $groupId, string $date)
     {
         $loader = new FilesystemLoader(__DIR__ . '/../../templates/my');
         $twig = new Environment($loader);
         $template = $twig->load('test.html.twig');
+        $schedule = $this->getSchedule($groupId, $date);
+        $html = $template->render(['schedule' => $schedule]);
 
-        echo $template->render(['text' => 'hi']);
-        die();
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $dompdf = new Dompdf($pdfOptions);
+        $dompdf->loadHtml($html, 'UTF-8');
+        $dompdf->setPaper('A4');
+        $dompdf->render();
+        //$dompdf->stream("schedule.pdf");
+        $dompdf->stream("schedule.pdf", [
+            "Attachment" => false
+        ]);
     }
 }

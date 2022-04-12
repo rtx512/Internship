@@ -1,7 +1,59 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head><title>Расписание</title></head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Расписание</title>
+    <style>
+        html {
+            font-family: "Arial", serif;
+        }
+        .day {
+            width: 80px;
+
+        }
+        .para {
+            font-size: 10px;
+        }
+        .time {
+            font-size: 15px;
+        }
+    </style>
+</head>
 <body>
-<h1>My test {{ text }}</h1>
+<h1>Schedule</h1>
+<table id="tableSchedule" border="1">
+    <tr>
+        <th class="day">Time</th>
+        <th class="day">Monday</th>
+        <th class="day">Tuesday</th>
+        <th class="day">Wednesday</th>
+        <th class="day">Thursday</th>
+        <th class="day">Friday</th>
+        <th class="day">Saturday</th>
+        <th class="day">Sunday</th>
+    </tr>
+    {% for items in schedule %}
+        <tr>
+            <th class="time">
+                {{ items.time.name }}
+            </th>
+            {% for day in items.days %}
+                {% if day != 'Hello' %}
+                <th class="para">
+                    {% if (day != null) %}
+                        Subject: {{ day.subject.name }}
+                        <br>
+                        Date: {{ day.date }}
+                        <br>
+                        Cabinet: {{ day.cabinet.name }}
+                        <br>
+                        Teacher: {{ day.teacher.name }}
+                    {% endif %}
+                </th>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
 </body>
 </html>

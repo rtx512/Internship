@@ -42,6 +42,16 @@ Ext.define('scheduleApp.view.main.list.List',  {
         {
             xtype: 'mainSchedule',
         }
-    ]
+    ],
+    buttons: [
+        {
+            xtype: 'button',
+            text: 'Сформировать PDF',
+
+            listeners: {
+                click: 'getTableSchedule',
+            }
+        }
+        ]
 });
 

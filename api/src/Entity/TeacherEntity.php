@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Dto\TeacherDto;
+use App\Dto\IdNameDto;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,11 +50,11 @@ class TeacherEntity
     }
 
     /**
-     * @return TeacherDto
+     * @return IdNameDto
      */
-    public function toDto(): TeacherDto
+    public function toDto(): IdNameDto
     {
-        $dto = new TeacherDto();
+        $dto = new IdNameDto();
         $dto->id = $this->getId();
         $dto->name = $this->getName();
         return $dto;

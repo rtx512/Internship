@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Dto\CabinetDto;
+use App\Dto\IdNameDto;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,11 +50,11 @@ class CabinetEntity
     }
 
     /**
-     * @return CabinetDto
+     * @return IdNameDto
      */
-    public function toDto(): CabinetDto
+    public function toDto(): IdNameDto
     {
-        $dto = new CabinetDto();
+        $dto = new IdNameDto();
         $dto->id = $this->getId();
         $dto->name = $this->getName();
         return $dto;

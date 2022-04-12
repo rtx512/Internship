@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Dto\GroupDto;
+use App\Dto\IdNameDto;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,11 +50,11 @@ class GroupEntity
     }
 
     /**
-     * @return GroupDto
+     * @return IdNameDto
      */
-    public function toDto(): GroupDto
+    public function toDto(): IdNameDto
     {
-        $dto = new GroupDto();
+        $dto = new IdNameDto();
         $dto->id = $this->getId();
         $dto->name = $this->getName();
         return $dto;
