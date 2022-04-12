@@ -3,10 +3,8 @@ Ext.define('scheduleApp.store.Schedule', {
 
     alias: 'store.schedule',
 
-    fields: [
-        {name: 'time'},
-        {name: 'days'}
-    ],
+    model: 'scheduleApp.model.ScheduleModel',
+
     proxy: {
         type: 'ajax',
         url: 'https://127.0.0.1:8000/Grid/getSchedule',

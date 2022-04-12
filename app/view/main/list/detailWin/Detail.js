@@ -27,6 +27,7 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
             store: 'scheduleApp.store.Groups',
             valueField: 'id',
             displayField: 'name',
+            queryMode: 'local',
             margin:10,
             bind: {
                 value: '{schedule.group.id}'
@@ -39,6 +40,7 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
             store: 'scheduleApp.store.Subject',
             valueField: 'id',
             displayField: 'name',
+            queryMode: 'local',
             margin:10,
             bind: {
                 value: '{schedule.subject.id}'
@@ -51,6 +53,7 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
             store: 'scheduleApp.store.Cabinet',
             valueField: 'id',
             displayField: 'name',
+            queryMode: 'local',
             margin:10,
             bind: {
                 value: '{schedule.cabinet.id}'
@@ -63,6 +66,7 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
             store: 'scheduleApp.store.Teacher',
             valueField: 'id',
             displayField: 'name',
+            queryMode: 'local',
             margin:10,
             bind: {
                 value: '{schedule.teacher.id}'
@@ -75,9 +79,10 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
             store: 'scheduleApp.store.Time',
             valueField: 'id',
             displayField: 'name',
+            queryMode: 'local',
             margin:10,
             bind: {
-                value: '{schedule.times.id}'
+                value: '{schedule.time.id}'
             }
         },
         {
@@ -89,16 +94,6 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
             bind: {
                 value: '{schedule.date}'
             }
-        },
-        {
-            xtype: 'textfield',
-            fieldLabel: 'id',
-            itemId: 'scheduleId',
-            margin:10,
-            bind: {
-                value: '{schedule.id}'
-            },
-            hidden: true
         },
     ],
     buttons: [

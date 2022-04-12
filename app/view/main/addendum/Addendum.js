@@ -1,8 +1,8 @@
 Ext.define('scheduleApp.view.main.addendum.Addendum', {
     extend: 'Ext.form.Panel',
     xtype: 'mainAddendum',
+    itemId: 'mainAddendum',
     requires: [
-        'scheduleApp.store.Personnel',
 
         'scheduleApp.view.main.addendum.AddendumModel',
         'scheduleApp.view.main.addendum.AddendumController'
@@ -110,6 +110,7 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             fieldLabel: 'Переодичность:',
             name: 'period',
             store: 'scheduleApp.store.Period',
+            queryMode: 'local',
             valueField: 'id',
             displayField: 'name',
             bind: {

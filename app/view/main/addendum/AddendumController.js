@@ -3,7 +3,7 @@ Ext.define('scheduleApp.view.main.addendum.AddendumController', {
     alias: 'controller.addendum',
 
     addPara: function(me) {
-        me.up().submit({
+        me.up('#mainAddendum').submit({
             url: 'https://127.0.0.1:8000/Grid/setSchedule',
         });
     }

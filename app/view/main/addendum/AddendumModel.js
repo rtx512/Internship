@@ -10,9 +10,9 @@ Ext.define('scheduleApp.view.main.addendum.AddendumModel', {
             teacherID: null,
             timeID: null,
             date: null,
-            cabinetID:null,
-            period:null,
-            manyCouples:null
+            cabinetID: null,
+            period: null,
+            manyCouples: null
         }
     },
 
@@ -21,28 +21,28 @@ Ext.define('scheduleApp.view.main.addendum.AddendumModel', {
             bind: {
                 bindTo: '{form.checkbox}'
             },
-            get: function(checkbox) {
+            get: function (checkbox) {
                 return !checkbox
             }
         },
         addForm: {
             bind: {
                 bindTo: '{form}',
-                deep:true
+                deep: true
             },
-            get: function (form){
-                if (form.cabinetID && form.groupsID && form.subjectID && form.teacherID && form.timeID && form.date){
-                    if (form.checkbox){
-                        if (form.period && form.manyCouples){
-                            return ''
+            get: function (form) {
+                if (form.cabinetID && form.groupsID && form.subjectID && form.teacherID && form.timeID && form.date) {
+                    if (form.checkbox) {
+                        if (form.period && form.manyCouples) {
+                            return false
                         } else {
-                            return 'true'
+                            return true
                         }
                     } else {
-                        return ''
+                        return false
                     }
                 } else {
-                    return 'true'
+                    return true
                 }
             }
         }

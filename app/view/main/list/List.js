@@ -1,8 +1,8 @@
 Ext.define('scheduleApp.view.main.list.List',  {
     extend: 'Ext.panel.Panel',
     xtype: 'mainlist',
+    itemId: 'mainlist',
     requires: [
-        'scheduleApp.store.Personnel',
         'scheduleApp.store.Groups',
 
         'scheduleApp.view.main.list.ListController',
@@ -17,7 +17,7 @@ Ext.define('scheduleApp.view.main.list.List',  {
         {
             margin: 10,
             xtype: 'combobox',
-            itemID: 'comboboxGroup',
+            itemId: 'comboboxGroup',
             fieldLabel: 'Группа',
             emptyText: 'Выберите группу',
             store: 'scheduleApp.store.Groups',
@@ -31,6 +31,7 @@ Ext.define('scheduleApp.view.main.list.List',  {
         {
             margin: 10,
             xtype: 'datefield',
+            itemId: 'datefieldDate',
             fieldLabel: 'Выберите дату понедельника недели:',
             format: 'd.m.Y',
             altFormats: 'd,m,Y|d.m.Y',
@@ -39,7 +40,7 @@ Ext.define('scheduleApp.view.main.list.List',  {
                 select: 'DateFilter',
             },
         },
-        {//pe4ehka228@mail.ru
+        {
             xtype: 'mainSchedule',
         }
     ],

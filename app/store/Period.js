@@ -3,8 +3,10 @@ Ext.define('scheduleApp.store.Period', {
 
     alias: 'store.period',
 
+    model: 'scheduleApp.model.IdNameModel',
+
     data: [
-        {id:'1', name:'Раз в неделю'},
-        {id:'2', name:'Раз в 2 недели'}
+        {id: '1', name: 'Раз в неделю'},
+        {id: '2', name: 'Раз в 2 недели'}
     ],
 });

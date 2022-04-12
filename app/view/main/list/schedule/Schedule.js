@@ -1,6 +1,7 @@
 Ext.define('scheduleApp.view.main.schedule.Schedule', {
     extend: 'Ext.grid.Panel',
     xtype: 'mainSchedule',
+    itemId: 'mainSchedule',
     requires:[
         'scheduleApp.view.main.schedule.ScheduleController',
         'scheduleApp.view.main.schedule.ScheduleModel',
