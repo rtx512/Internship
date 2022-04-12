@@ -5,7 +5,6 @@ namespace App\Entity;
 
 use App\Dto\CellDto;
 use App\Dto\GridScheduleDto;
-use Cassandra\Date;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

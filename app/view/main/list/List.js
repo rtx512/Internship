@@ -39,7 +39,7 @@ Ext.define('scheduleApp.view.main.list.List',  {
                 select: 'DateFilter',
             },
         },
-        {
+        {//pe4ehka228@mail.ru
             xtype: 'mainSchedule',
         }
     ],
@@ -47,9 +47,8 @@ Ext.define('scheduleApp.view.main.list.List',  {
         {
             xtype: 'button',
             text: 'Сформировать PDF',
-
             listeners: {
-                click: 'getTableSchedule',
+                click: 'getPDFSchedule',
             }
         }
         ]

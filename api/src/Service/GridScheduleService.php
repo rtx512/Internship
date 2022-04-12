@@ -80,15 +80,18 @@ class GridScheduleService
             $result[$time->getId()] = $rowDto;
         }
 
-        $itemCellDtos = [];
-        /** @var GridScheduleEntity $item */
-        foreach ($items as $item) {
-            $itemCellDtos[] = $item->toCellDto();
-        }
-        $i = 0;
-        foreach ($itemCellDtos as $itemCellDto) {
-            $result[($itemDtos[$i]->time->id)]->days[$itemDtos[$i]->day] = $itemCellDto;
-            $i += 1;
+//        $itemCellDtos = [];
+//        /** @var GridScheduleEntity $item */
+//        foreach ($items as $item) {
+//            $itemCellDtos[] = $item->toCellDto();
+//        }
+//        $i = 0;
+//        foreach ($itemCellDtos as $itemCellDto) {
+//            $result[($itemDtos[$i]->time->id)]->days[$itemDtos[$i]->day] = $itemCellDto;
+//            $i += 1;
+//        }
+        foreach ($itemDtos as $itemDto) {
+            $result[$itemDto->time->id]->days[$itemDto->day] = $itemDto;
         }
         return array_values($result);
     }
@@ -185,7 +188,6 @@ class GridScheduleService
         $dompdf->loadHtml($html, 'UTF-8');
         $dompdf->setPaper('A4');
         $dompdf->render();
-        //$dompdf->stream("schedule.pdf");
         $dompdf->stream("schedule.pdf", [
             "Attachment" => false
         ]);

@@ -20,7 +20,7 @@ class ListController extends AbstractController
     /**
      * @Route("List/getSubjects")
      */
-    public function getSubject():Response
+    public function getSubject(): Response
     {
         $Subjects = $this->mainService->getSubjects();
         return new JsonResponse($Subjects);

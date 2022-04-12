@@ -15,7 +15,6 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
         {
             margin: 10,
             xtype: 'combobox',
-            itemId:'groupsId',
             name: 'groupsId',
             fieldLabel: 'Группа:',
             emptyText: 'Выберите группу',
@@ -32,7 +31,6 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
         {
             margin: 10,
             xtype: 'combo',
-            itemId:'subjectId',
             name: 'subjectId',
             fieldLabel: 'Предмет:',
             emptyText: 'Выберите предмет',
@@ -47,7 +45,6 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
         {
             margin: 10,
             xtype: 'combobox',
-            itemId: 'cabinetId',
             name:'cabinetId',
             fieldLabel: 'Кабинет:',
             emptyText: 'Выберите кабинет',
@@ -62,7 +59,6 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
         {
             margin: 10,
             xtype: 'combo',
-            itemId: 'teacherId',
             name: 'teacherId',
             fieldLabel: 'Препод:',
             emptyText: 'Выберите преподавателя',
@@ -78,7 +74,6 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             margin: 10,
             xtype: 'combo',
             name: 'timeId',
-            itemId: 'timeId',
             fieldLabel: 'Время:',
             emptyText: 'Выберите время',
             store: 'scheduleApp.store.Time',
@@ -94,7 +89,6 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             xtype: 'datefield',
             fieldLabel: 'Дата',
             name: 'date',
-            itemId: 'date',
             format: 'd.m.Y',
             altFormats: 'd,m,Y|d.m.Y',
             bind: {
@@ -115,7 +109,6 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             xtype: 'combo',
             fieldLabel: 'Переодичность:',
             name: 'period',
-            itemId: 'period',
             store: 'scheduleApp.store.Period',
             valueField: 'id',
             displayField: 'name',

@@ -27,7 +27,7 @@ Ext.define('scheduleApp.view.main.list.ListController', {
         }
     },
 
-    getTableSchedule: function (me) {
+    getPDFSchedule: function (me) {
         me = me.up('mainlist');
         if ((me.down('datefield').lastValue != null) && (me.down('combobox').getValue() != null)) {
             window.open(

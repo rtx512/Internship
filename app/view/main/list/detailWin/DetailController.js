@@ -27,7 +27,6 @@ Ext.define('scheduleApp.view.main.list.detailWin.DetailController', {
             success: function () {
                 detailWindow.close();
                 Ext.ComponentQuery.query('mainSchedule')[0].getStore().reload();
-                // detailWindow.schedule.reload();
             }
         })
     },
@@ -41,9 +40,7 @@ Ext.define('scheduleApp.view.main.list.detailWin.DetailController', {
             },
             success: function () {
                 detailWindow.close();
-                //debugger;
                 Ext.ComponentQuery.query('mainSchedule')[0].getStore().reload();
-                // detailWindow.schedule.reload();
             }
         });
     }

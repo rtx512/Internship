@@ -28,7 +28,6 @@ Ext.define('scheduleApp.view.main.list.detailWin.Detail',{
             valueField: 'id',
             displayField: 'name',
             margin:10,
-            autoSelect: true,
             bind: {
                 value: '{schedule.group.id}'
             }
