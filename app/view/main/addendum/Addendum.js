@@ -1,8 +1,8 @@
 Ext.define('scheduleApp.view.main.addendum.Addendum', {
-    extend:'Ext.form.Panel',
+    extend: 'Ext.form.Panel',
     xtype: 'mainAddendum',
+    itemId: 'mainAddendum',
     requires: [
-        'scheduleApp.store.Personnel',
 
         'scheduleApp.view.main.addendum.AddendumModel',
         'scheduleApp.view.main.addendum.AddendumController'
@@ -10,12 +10,13 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
     ],
     controller: 'addendum',
     viewModel: 'addendum',
-    title:'Добавление новой пары',
+    title: 'Добавление новой пары',
     items: [
         {
-            margin:10,
-            xtype:'combobox',
-            fieldLabel:'Группа:',
+            margin: 10,
+            xtype: 'combobox',
+            name: 'groupsId',
+            fieldLabel: 'Группа:',
             emptyText: 'Выберите группу',
             store: 'scheduleApp.store.Groups',
             valueField: 'id',
@@ -28,8 +29,9 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
 
         },
         {
-            margin:10,
-            xtype:'combo',
+            margin: 10,
+            xtype: 'combo',
+            name: 'subjectId',
             fieldLabel: 'Предмет:',
             emptyText: 'Выберите предмет',
             store: 'scheduleApp.store.Subject',
@@ -41,8 +43,23 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             }
         },
         {
-            margin:10,
-            xtype:'combo',
+            margin: 10,
+            xtype: 'combobox',
+            name:'cabinetId',
+            fieldLabel: 'Кабинет:',
+            emptyText: 'Выберите кабинет',
+            store: 'scheduleApp.store.Cabinet',
+            valueField: 'id',
+            displayField: 'name',
+            queryMode: 'local',
+            bind: {
+                value: "{form.cabinetID}",
+            }
+        },
+        {
+            margin: 10,
+            xtype: 'combo',
+            name: 'teacherId',
             fieldLabel: 'Препод:',
             emptyText: 'Выберите преподавателя',
             store: 'scheduleApp.store.Teacher',
@@ -54,8 +71,9 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             }
         },
         {
-            margin:10,
-            xtype:'combo',
+            margin: 10,
+            xtype: 'combo',
+            name: 'timeId',
             fieldLabel: 'Время:',
             emptyText: 'Выберите время',
             store: 'scheduleApp.store.Time',
@@ -74,39 +92,51 @@ Ext.define('scheduleApp.view.main.addendum.Addendum', {
             format: 'd.m.Y',
             altFormats: 'd,m,Y|d.m.Y',
             bind: {
-                value: '{form.dateID}'
+                value: '{form.date}'
             }
         },
         {
             margin: 10,
-            xtype:'checkbox',
+            xtype: 'checkbox',
             fieldLabel: 'Повторять:',
+            name: 'isRepeatable',
             bind: {
                 value: '{form.checkbox}'
             }
         },
         {
             margin: 10,
-            xtype:'textfield',
+            xtype: 'combo',
             fieldLabel: 'Переодичность:',
+            name: 'period',
+            store: 'scheduleApp.store.Period',
+            queryMode: 'local',
+            valueField: 'id',
+            displayField: 'name',
             bind: {
+                value: '{form.period}',
                 disabled: '{checkboxChecked}'
             }
         },
         {
-            margin:10,
-            xtype:'textfield',
-            fieldLabel: 'Сколько недель:',
+            margin: 10,
+            xtype: 'textfield',
+            name: 'manyCouples',
+            fieldLabel: 'Сколько пар:',
             bind: {
+                value: '{form.manyCouples}',
                 disabled: '{checkboxChecked}'
             },
         },
-            {
-                xtype: 'button',
-                text: 'Добавить',
-                bind: {
-                    disabled: '{addForm}',
-                },
+        {
+            xtype: 'button',
+            text: 'Добавить',
+            bind: {
+                disabled: '{addForm}',
+            },
+            listeners: {
+                click: 'addPara',
             }
-    ]
+        }
+    ],
 });

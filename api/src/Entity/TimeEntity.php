@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Dto\TimeDto;
+use App\Dto\IdNameDto;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,11 +50,11 @@ class TimeEntity
     }
 
     /**
-     * @return TimeDto
+     * @return IdNameDto
      */
-    public function toDto(): TimeDto
+    public function toDto(): IdNameDto
     {
-        $dto = new TimeDto();
+        $dto = new IdNameDto();
         $dto->id = $this->getId();
         $dto->name = $this->getName();
         return $dto;

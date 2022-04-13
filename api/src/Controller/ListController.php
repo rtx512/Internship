@@ -20,9 +20,9 @@ class ListController extends AbstractController
     /**
      * @Route("List/getSubjects")
      */
-    public function getSubject():Response
+    public function getSubject(): Response
     {
-        $Subjects = $this->mainService->getSubject();
+        $Subjects = $this->mainService->getSubjects();
         return new JsonResponse($Subjects);
     }
 
@@ -40,7 +40,7 @@ class ListController extends AbstractController
      */
     public function getTeachers(): Response
     {
-        $Teachers = $this->mainService->getTeacher();
+        $Teachers = $this->mainService->getTeachers();
         return new JsonResponse($Teachers);
     }
 
@@ -49,7 +49,17 @@ class ListController extends AbstractController
      */
     public function getTimes(): Response
     {
-        $Times = $this->mainService->getTime();
-        return new JsonResponse($Times);
+        $times = $this->mainService->getTimes();
+        return new JsonResponse($times);
     }
+
+    /**
+     * @Route("List/getCabinet")
+     */
+    public function getCabinet(): Response
+    {
+        $Cabinet = $this->mainService->getCabinets();
+        return new JsonResponse($Cabinet);
+    }
+
 }

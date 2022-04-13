@@ -2,7 +2,7 @@
 
 namespace App\Dto;
 
-class SubjectDto
+class IdNameDto
 {
     public int $id;
 

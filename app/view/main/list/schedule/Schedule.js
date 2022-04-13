@@ -1,15 +1,16 @@
 Ext.define('scheduleApp.view.main.schedule.Schedule', {
     extend: 'Ext.grid.Panel',
     xtype: 'mainSchedule',
+    itemId: 'mainSchedule',
     requires:[
         'scheduleApp.view.main.schedule.ScheduleController',
         'scheduleApp.view.main.schedule.ScheduleModel',
 
-        'scheduleApp.store.Personnel'
+        'scheduleApp.store.Schedule'
     ],
 
     store:{
-        type: 'personnel',
+        type: 'schedule',
     },
 
     controller: 'schedule',
@@ -19,13 +20,16 @@ Ext.define('scheduleApp.view.main.schedule.Schedule', {
         items:[
             {
                 text:'Время',
-                dataIndex:'time',
+                dataIndex: 'time',
                 flex: 0.8,
                 listenersDisable:true,
-                renderer: null,
+                renderer: function (value) {
+                    return value.name
+                },
             },
             {
-                text:'Понидельник',
+                text:'Понедельник',
+                itemId: 'monday'
             },
             {
                 text:'Вторник',
@@ -38,6 +42,12 @@ Ext.define('scheduleApp.view.main.schedule.Schedule', {
             },
             {
                 text:'Пятница',
+            },
+            {
+                text:'Субота',
+            },
+            {
+                text:'Воскресенье',
             },
         ],
         defaults: {

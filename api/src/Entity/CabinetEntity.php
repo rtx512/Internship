@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="subject")
+ * @ORM\Table(name="cabinet")
  */
-class SubjectEntity
+class CabinetEntity
 {
     /**
      * @ORM\Id()
@@ -19,7 +19,7 @@ class SubjectEntity
     private int $id;
 
     /**
-     * @ORM\Column (name="name", type="string")
+     * @ORM\Column(name="name", type="string")
      */
     private string $name;
 
@@ -41,9 +41,9 @@ class SubjectEntity
 
     /**
      * @param string $name
-     * @return SubjectEntity
+     * @return CabinetEntity
      */
-    public function setName(string $name): SubjectEntity
+    public function setName(string $name): CabinetEntity
     {
         $this->name = $name;
         return $this;
